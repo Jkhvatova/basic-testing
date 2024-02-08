@@ -23,14 +23,25 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should exponentiate two numbers', () => {
-    // Write your test here
+    const result = simpleCalculator({
+      a: 7,
+      b: 2,
+      action: Action.Exponentiate,
+    });
+    expect(result).toBe(49);
   });
 
   test('should return null for invalid action', () => {
-    // Write your test here
+    const result = simpleCalculator({ a: 2, b: 3, action: 'Action.Invalid' });
+    expect(result).toBe(null);
   });
 
   test('should return null for invalid arguments', () => {
-    // Write your test here
+    const result = simpleCalculator({
+      a: 2,
+      b: 'invalidArgument',
+      action: Action.Add,
+    });
+    expect(result).toBe(null);
   });
 });

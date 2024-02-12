@@ -1,5 +1,5 @@
 // Uncomment the code below and write your tests
-import { doStuffByInterval, doStuffByTimeout } from '.';
+import { doStuffByInterval, doStuffByTimeout, readFileAsynchronously } from '.';
 
 describe('doStuffByTimeout', () => {
   beforeAll(() => {
@@ -66,7 +66,9 @@ describe('readFileAsynchronously', () => {
   });
 
   test('should return null if file does not exist', async () => {
-    // Write your test here
+    const fileThatDoesNotExist = 'no-file.txt';
+    const result = await readFileAsynchronously(fileThatDoesNotExist);
+    expect(result).toBeNull();
   });
 
   test('should return file content if file exists', async () => {

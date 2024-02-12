@@ -1,5 +1,5 @@
 // Uncomment the code below and write your tests
-import { doStuffByTimeout } from '.';
+import { doStuffByInterval, doStuffByTimeout } from '.';
 
 describe('doStuffByTimeout', () => {
   beforeAll(() => {
@@ -39,11 +39,24 @@ describe('doStuffByInterval', () => {
   });
 
   test('should set interval with provided callback and timeout', () => {
-    // Write your test here
+    const testCallback = jest.fn();
+    const testInterval = 1000;
+    jest.spyOn(global, 'setInterval');
+    doStuffByInterval(testCallback, testInterval);
+    expect(setInterval).toHaveBeenCalledWith(testCallback, testInterval);
+    jest.restoreAllMocks();
   });
 
   test('should call callback multiple times after multiple intervals', () => {
-    // Write your test here
+    const testCallback = jest.fn();
+    const testInterval = 1000;
+    doStuffByInterval(testCallback, testInterval);
+    expect(testCallback).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(testInterval);
+    for (let i = 1; i < 10; i++) {
+      jest.advanceTimersByTime(testInterval);
+    }
+    expect(testCallback).toHaveBeenCalledTimes(10);
   });
 });
 
